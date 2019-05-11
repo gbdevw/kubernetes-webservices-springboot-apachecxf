@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="services" targetNamespace="http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:types="http://webservices-k8s-springboot-apachecxf.guillaume-braibant/types">
+    
+    <!-- Import custom XML types from .xsd files -->
+
+    <!-- Import the type from the full-name.xsd file that is put aside the wsdl in the src/main/resources folder -->
+    <wsdl:types>
+        <xs:schema>
+            <xs:import schemaLocation="full-name.xsd" namespace="http://webservices-k8s-springboot-apachecxf.guillaume-braibant/types" />
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- Define the messages exchanged -->
+
+    <!-- Define the input message : the full name of the user -->    
+    <wsdl:message name="sayHelloInput">
+        <wsdl:part name="username" type="types:fullName"/>
+    </wsdl:message>
+    
+    <!-- Define the output message : A sentence saying : "Hello <fullUsername> from <HOSTNAME>" -->
+    <wsdl:message name="sayHelloOutput">
+        <wsdl:part name="response" type="xs:string"/>
+    </wsdl:message>
+    
+    <!-- Define the operations available through the webservice -->
+    
+    <!-- Define the interface sayHelloInterface that will have one method named sayHello -->
+    <wsdl:portType name="sayHelloInterface">
+        <wsdl:operation name="sayHello">
+            <!-- The method sayHello uses the two messages defined in the wsdl:message elements -->
+            <wsdl:input name="request" message="tns:sayHelloInput" />
+            <wsdl:output name="response" message="tns:sayHelloOutput" />
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <!-- Define how to interact with the webservice -->
+
+    <!-- Define the protocol used for the sayHello service : SOAP on HTTP with an XML document put in the soap:body -->
+    <wsdl:binding name="sayHelloSoapHttpBinding" type="tns:sayHelloInterface">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="sayHello">
+            <wsdl:input>
+                <soap:body />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <!-- Define where the webservice will be located-->
+
+    <!-- The services will be located at http://localhost:8080/services/sayHello -->
+    <wsdl:service name="sayHelloService">
+        <wsdl:port name="sayHelloInterface" binding="tns:sayHelloSoapHttpBinding">
+            <soap:address location="http://localhost:8080/services/sayhello" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
