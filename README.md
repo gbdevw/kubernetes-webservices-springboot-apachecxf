@@ -1,2 +1,3 @@
-# kubernetes-webservices-springboot-apachecxf
-Sample project that shows how to host a webservices on Kubernetes with a simple Spring Boot + Apache CXF application.
+# Webservices on Kubernetes with Spring Boot, Apache CXF and Docker
+
+This sample project shows how to host a webservice on Kubernetes with a simple containerized Spring Boot & Apache CXF application.
