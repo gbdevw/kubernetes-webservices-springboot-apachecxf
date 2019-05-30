@@ -15,13 +15,13 @@ import javax.xml.ws.Service;
  */
 @WebServiceClient(name = "sayHelloService",
                   wsdlLocation = "file:/C:/Users/BraibantGuillaume/Desktop/Dev/Projets/kubernetes-webservices-springboot-apachecxf/src/main/resources/services.wsdl",
-                  targetNamespace = "http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces/")
+                  targetNamespace = "http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces")
 public class SayHelloService extends Service {
 
     public final static URL WSDL_LOCATION;
 
-    public final static QName SERVICE = new QName("http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces/", "sayHelloService");
-    public final static QName SayHelloInterface = new QName("http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces/", "sayHelloInterface");
+    public final static QName SERVICE = new QName("http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces", "sayHelloService");
+    public final static QName SayHelloInterface = new QName("http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces", "sayHelloInterface");
     static {
         URL url = null;
         try {

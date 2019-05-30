@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * Generated source version: 3.2.7
  *
  */
-@WebService(targetNamespace = "http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces/", name = "sayHelloInterface")
+@WebService(targetNamespace = "http://webservices-k8s-springboot-apachecxf.guillaume-braibant/interfaces", name = "sayHelloInterface")
 @XmlSeeAlso({guillaume_braibant.webservices_k8s_springboot_apachecxf.types.ObjectFactory.class})
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface SayHelloInterface {
