@@ -1,0 +1,65 @@
+# Create a dedicated namespace for all resources
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-ws-sboot-cxf-gb
+---
+# Create the service for the pods that embody the webservice applciation
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws-service
+  namespace: k8s-ws-sboot-cxf-gb
+  labels:
+    app: k8s-ws-sboot-cxf
+spec:
+  ports:
+  - port : 8080
+    targetPort: 8080
+  selector:
+    app: k8s-ws-sboot-cxf
+---
+# Deployment for the pods that embody the webservice application
+# 4 replicas
+# Liveness probe
+# Rolling update
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws-deployment
+  namespace: k8s-ws-sboot-cxf-gb
+spec:
+  selector:
+    matchLabels:
+      app: k8s-ws-sboot-cxf
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: k8s-ws-sboot-cxf
+        namespace: k8s-ws-sboot-cxf-gb
+    spec:
+      containers:
+      - name: ws-application
+        image: guillaumebraibant/k8s-ws-sboot-cxf:1.0.0
+        ports:
+        - containerPort: 8080
+---
+# Create the ingress resource in order to enable the use of the webservices from outside the k8s cluster
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ws-ingress
+  namespace: k8s-ws-sboot-cxf-gb
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: ws-service
+    servicePort: 8080
+---
