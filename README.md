@@ -54,7 +54,7 @@ It is the endpoint used by the web service to receive requests
 - http://localhost:8080/services/sayhello?wsdl :
 This URL points the .wsdl file that describes the web service
 
-Note : If you run the application on Minikube, you the port 80 (default http) and replace the localhost by the IP address displayed by :
+Note : If you run the application on Minikube, use the http port and replace the localhost by the IP address displayed by :
 
 ```bash
 minikube ip
