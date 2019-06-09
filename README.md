@@ -1,6 +1,6 @@
 ## Simple web service on Kubernetes (Spring Boot + Apache CXF + Docker)
 
-This project shows how to host a web service on Kubernetes with a simple containerized Spring Boot & Apache CXF application.
+This project shows how to run a simple containerized Spring Boot & Apache CXF web service on Kubernetes.
 
 ### Run locally
 
@@ -68,4 +68,4 @@ Use the integration test :
 mvn test
 ```
 
-Or use a tool like SoapUI
+Or create a client or use a tool like SoapUI
