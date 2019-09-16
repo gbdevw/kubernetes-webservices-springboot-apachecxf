@@ -76,7 +76,7 @@
 										<extraarg>FQCN</extraarg>
 									</extraargs>
 									<bindingFiles>
-                                        <bindingFile>${basedir}/${webservices.files.location}/serializable_binding.xml</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/serializable_binding.xml</bindingFile>
                                     </bindingFiles>
 								</wsdlOption>
 							</wsdlOptions>
