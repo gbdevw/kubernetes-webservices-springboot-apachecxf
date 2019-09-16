@@ -70,7 +70,6 @@
 								<wsdlOption>
 									<wsdl>${basedir}/src/main/resources/services.wsdl</wsdl>
 									<extraargs>
-										<extraarg>-p</extraarg>
 										<extraarg>-suppress-generated-date</extraarg>
 										<extraarg>-faultSerialVersionUID</extraarg>
 										<extraarg>FQCN</extraarg>
