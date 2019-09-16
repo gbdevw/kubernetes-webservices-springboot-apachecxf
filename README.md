@@ -9,6 +9,12 @@ This project shows how to run a simple containerized Spring Boot & Apache CXF we
 - Simple containerization of the application
 - Simple deployment on Kubernetes using standard features
 
+### Prerequisites
+
+- Maven
+- Docker
+- Minikube
+
 ### Generate sources from wsdl and xsd files
 
 Run the following command to (re)generate webservices java classes
