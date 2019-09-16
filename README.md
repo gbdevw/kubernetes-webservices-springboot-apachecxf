@@ -2,6 +2,13 @@
 
 This project shows how to run a simple containerized Spring Boot & Apache CXF web service on Kubernetes.
 
+### Features
+
+- Simple webservice application with Spring Boot and Apache CXF
+- wsdl2java Maven plugin setup to work in a WSDL-first fashion and generate webservice java classes with mvn generate-sources phase
+- Simple containerization of the application
+- Simple deployment on Kubernetes using standard features
+
 ### Run locally
 
 Use the public docker image :
@@ -34,6 +41,8 @@ Once you are done, delete all resources :
 ```bash
 kubectl delete namespace k8s-ws-sboot-cxf-gb
 ```
+
+Note : You can use an Ingress resource instead of a Nodeport service as the SOAP protocol operates over HTTP.
 
 ### Endpoints - Local (local docker host or local run)
 
