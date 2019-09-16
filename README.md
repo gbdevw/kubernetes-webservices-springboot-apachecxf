@@ -5,9 +5,31 @@ This project shows how to run a simple containerized Spring Boot & Apache CXF we
 ### Features
 
 - Simple webservice application with Spring Boot and Apache CXF
-- wsdl2java Maven plugin setup to work in a WSDL-first fashion and generate webservice java classes with mvn generate-sources phase
+- wsdl2java Maven plugin setup to work in a WSDL-first fashion
 - Simple containerization of the application
 - Simple deployment on Kubernetes using standard features
+
+### Generate sources from wsdl and xsd files
+
+Run the following command to (re)generate webservices java classes
+
+```bash
+mvn clean generate-sources
+```
+
+### Build
+
+Build with test phase :
+
+```bash
+mvn package
+```
+
+Build without test phase :
+
+```bash
+mvn package -DskipTests
+```
 
 ### Run locally
 
@@ -72,7 +94,7 @@ This URL points the .wsdl file that describes the web service
 
 ### Test
 
-Use the integration test :
+Use the unit and integration test :
 
 ```bash
 mvn test
