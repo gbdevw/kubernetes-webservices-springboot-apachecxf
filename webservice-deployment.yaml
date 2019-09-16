@@ -4,34 +4,36 @@ kind: Namespace
 metadata:
   name: k8s-ws-sboot-cxf-gb
 ---
-# Create the service for the pods that embody the webservice applciation
+# Create a headless service to resolve webservice application pods
 apiVersion: v1
 kind: Service
 metadata:
-  name: ws-service
+  name: webservices-headless-service
   namespace: k8s-ws-sboot-cxf-gb
   labels:
     app: k8s-ws-sboot-cxf
+    component: webservices
 spec:
   ports:
   - port : 8080
     targetPort: 8080
   selector:
     app: k8s-ws-sboot-cxf
+    component: webservices
 ---
 # Deployment for the pods that embody the webservice application
 # 4 replicas
-# Liveness probe
 # Rolling update
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ws-deployment
+  name: webservices-deployment
   namespace: k8s-ws-sboot-cxf-gb
 spec:
   selector:
     matchLabels:
       app: k8s-ws-sboot-cxf
+      component: webservices
   replicas: 4
   strategy:
     type: RollingUpdate
@@ -40,26 +42,34 @@ spec:
       maxUnavailable: 25%
   template:
     metadata:
+      namespace: k8s-ws-sboot-cxf-gb
       labels:
         app: k8s-ws-sboot-cxf
-        namespace: k8s-ws-sboot-cxf-gb
+        component: webservices
     spec:
       containers:
-      - name: ws-application
+      - name: webservices-application
         image: guillaumebraibant/k8s-ws-sboot-cxf:1.0.0
         ports:
         - containerPort: 8080
 ---
-# Create the ingress resource in order to enable the use of the webservices from outside the k8s cluster
-apiVersion: extensions/v1beta1
-kind: Ingress
+# NodePort service to allow remote access (from outside your K8S cluster) to the webservices
+# Port used : 31001
+apiVersion: v1
+kind: Service
 metadata:
-  name: ws-ingress
-  namespace: k8s-ws-sboot-cxf-gb
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    name: webservices-proxy
+    namespace: k8s-ws-sboot-cxf-gb
+    labels:
+        app: k8s-ws-sboot-cxf
+        component: webservices-proxy
 spec:
-  backend:
-    serviceName: ws-service
-    servicePort: 8080
----
+    type: NodePort
+    ports:
+      - name: http
+        nodePort: 31001
+        port: 8080
+        protocol: TCP
+    selector:
+      app: k8s-ws-sboot-cxf
+      component: webservices
